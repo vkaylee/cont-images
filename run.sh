@@ -46,23 +46,12 @@ printMdTableRow() {
   printf '%s | %s \n' "$1" "$2" >>"$3"
 }
 
-
 cacheFolderScan() {
-  local tags=""
-  local returnTags=""
   find "${workDir}/cache" -type f -name "*.txt" | while IFS= read -r cacheFile; do
-  for i in $(<"${cacheFile}"); do
-    # If empty string
-    if [ -z "${returnTags}" ]; then
-      tags="${i}"
-    else
-      tags="${tags}\n${i}" # Append
-    fi
-    returnTags="${tags}"
+    for i in $(<"${cacheFile}"); do
+      echo -e "${i}" # Use -e
+    done
   done
-
-  return "${returnTags}"
-done
 }
 
 # Create README.md
