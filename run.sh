@@ -40,8 +40,7 @@ run() {
 generateReadme() {
   local dockerImageAndTag=$1
   local githubImageAndTag=$2
-  printf "\t%s\t->\t%s\n" "${dockerImageAndTag}" "${githubImageAndTag}" > "${readmeTempFile}"
-  cat "${readmeTempFile}"
+  printf "\t%s\t->\t%s\n" "${dockerImageAndTag}" "${githubImageAndTag}" >> "${readmeTempFile}"
 }
 # Create README.temp.md
 readmeFile="${workDir}/README.md"
