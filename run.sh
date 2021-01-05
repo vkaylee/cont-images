@@ -22,9 +22,10 @@ run() {
   # Check existed
   if docker pull "${githubImageAndTag}"; then
     isGithubImageExisted=true
-  fi
-  if docker pull "${dockerImageAndTag}"; then
-    isDockerImageExisted=true
+  else
+    if docker pull "${dockerImageAndTag}"; then
+      isDockerImageExisted=true
+    fi
   fi
   # Pull and push
   if [ "${isGithubImageExisted}" = false ] && [ "${isDockerImageExisted}" = true ]; then
@@ -39,17 +40,20 @@ run() {
 generateReadme() {
   local dockerImageAndTag=$1
   local githubImageAndTag=$2
-  tee README.md << END
-## List Mariadb
-  - asd
-  - asd
-  - asd
-END
-  cat README.md
+  printf "\t%s\t->\t%s\n" "${dockerImageAndTag}" "${githubImageAndTag}" > "${readmeTempFile}"
+  cat "${readmeTempFile}"
 }
+# Create README.temp.md
+readmeFile="${workDir}/README.md"
+readmeTempFile="${workDir}/README.temp.md"
+touch "${readmeTempFile}"
+printf '## List Images\n' >"${readmeTempFile}"
 # Generate all cache files
 find "${workDir}/cache" -type f -name "*.txt" | while IFS= read -r cacheFile; do
   for i in $(<"${cacheFile}"); do
     run "$i"
   done
 done
+# Update readme file
+rm "${readmeFile}"
+mv "${readmeTempFile}" "${readmeFile}"
