@@ -1,3 +1,5 @@
+![CI](https://github.com/vleedev/cont-images/workflows/CI/badge.svg)
+
 # Describe
   This repo is used to store container images.
   
