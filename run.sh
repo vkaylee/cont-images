@@ -43,8 +43,28 @@ generateReadme() {
   printMdTableRow "${dockerImageAndTag}" "${githubImageAndTag}" "${readmeFile}"
 }
 printMdTableRow() {
-  printf '%s | %s \n' "$1" "$2" >> "$3"
+  printf '%s | %s \n' "$1" "$2" >>"$3"
 }
+
+
+cacheFolderScan() {
+  local tags=""
+  local returnTags=""
+  find "${workDir}/cache" -type f -name "*.txt" | while IFS= read -r cacheFile; do
+  for i in $(<"${cacheFile}"); do
+    # If empty string
+    if [ -z "${returnTags}" ]; then
+      tags="${i}"
+    else
+      tags="${tags}\n${i}" # Append
+    fi
+    returnTags="${tags}"
+  done
+
+  return "${returnTags}"
+done
+}
+
 # Create README.md
 readmeFile="${workDir}/README.md"
 repoReadmeFile="${workDir}/REPO_README.md"
@@ -55,14 +75,12 @@ if [ ! -f "${repoReadmeFile}" ]; then
   touch "${repoReadmeFile}"
 fi
 # Update readme file
-cat "${repoReadmeFile}" > "${readmeFile}"
-printf '\n## List Images\n' >> "${readmeFile}"
+cat "${repoReadmeFile}" >"${readmeFile}"
+printf '\n## List Images\n' >>"${readmeFile}"
 printMdTableRow 'Docker hub image' 'Github image' "${readmeFile}"
 printMdTableRow '----------------' '------------' "${readmeFile}"
 
-# Generate all cache files
-find "${workDir}/cache" -type f -name "*.txt" | sort | while IFS= read -r cacheFile; do
-  for i in $(<"${cacheFile}"); do
-    run "$i"
-  done
+listTags="$(cacheFolderScan)"
+echo "${listTags}" | sort -u | while IFS= read -r tag; do
+  run "${tag}"
 done
