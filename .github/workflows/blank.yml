@@ -38,5 +38,5 @@ jobs:
         with:
           author_name: vleedev
           author_email: me@vlee.dev
-          message: 'Update README.md'
-          add: 'README.md'
+          message: 'update by CI'
+          add: '["README.md", "./cache/*.txt"]'

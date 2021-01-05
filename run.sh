@@ -76,7 +76,9 @@ cat "${repoReadmeFile}" >"${readmeFile}"
 printf '\n## List Images\n' >>"${readmeFile}"
 printMdTableRow 'Docker hub image' 'Github image' "${readmeFile}"
 printMdTableRow '----------------' '------------' "${readmeFile}"
-
+#####
+makeUniqueCacheFolder
+#####
 listTags="$(takeListTags)"
 echo "${listTags}" | sort -u | while IFS= read -r tag; do
   run "${tag}"
