@@ -45,12 +45,20 @@ generateReadme() {
 printMdTableRow() {
   printf '%s | %s \n' "$1" "$2" >>"$3"
 }
-
-cacheFolderScan() {
-  find "${workDir}/cache" -type f -name "*.txt" | while IFS= read -r cacheFile; do
+cacheFolderTxtFileScan() {
+  find "${workDir}/cache" -type f -name "*.txt"
+}
+takeListTags() {
+  cacheFolderTxtFileScan | while IFS= read -r cacheFile; do
     for i in $(<"${cacheFile}"); do
       echo -e "${i}" # Use -e
     done
+  done
+}
+makeUniqueCacheFolder() {
+  cacheFolderTxtFileScan | while IFS= read -r cacheFile; do
+    sort -u "${cacheFile}" > "${cacheFile}.temp"
+    cat "${cacheFile}.temp" > "${cacheFile}"
   done
 }
 
@@ -69,7 +77,7 @@ printf '\n## List Images\n' >>"${readmeFile}"
 printMdTableRow 'Docker hub image' 'Github image' "${readmeFile}"
 printMdTableRow '----------------' '------------' "${readmeFile}"
 
-listTags="$(cacheFolderScan)"
+listTags="$(takeListTags)"
 echo "${listTags}" | sort -u | while IFS= read -r tag; do
   run "${tag}"
 done
