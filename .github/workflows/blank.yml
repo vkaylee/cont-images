@@ -47,3 +47,5 @@ jobs:
           author_email: me@vlee.dev
           message: 'make unique by CI'
           add: 'cache/*.txt'
+      - name: Docker logout
+        run: docker logout ghcr.io
