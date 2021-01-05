@@ -1,2 +1,2 @@
-docker:20.10.1-git
 docker:20.10.1-dind
+docker:20.10.1-git
