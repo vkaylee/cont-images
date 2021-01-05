@@ -12,6 +12,9 @@
   1. Fork the repo
   2. Update txt files or create new txt file in `cache` folder
   3. Make pull request
+  4. Wait CI pipeline to be done
+
+## (All info below will be updated automatically by CI)
 
 ## List Images
 Docker hub image | Github image 
