@@ -40,19 +40,29 @@ run() {
 generateReadme() {
   local dockerImageAndTag=$1
   local githubImageAndTag=$2
-  printf "\t%s\t->\t%s\n" "${dockerImageAndTag}" "${githubImageAndTag}" >> "${readmeTempFile}"
+  printMdTableRow "${dockerImageAndTag}" "${githubImageAndTag}" "${readmeFile}"
+}
+printMdTableRow() {
+  printf '%s | %s \n' "$1" "$2" >> "$3"
 }
 # Create README.temp.md
 readmeFile="${workDir}/README.md"
-readmeTempFile="${workDir}/README.temp.md"
-touch "${readmeTempFile}"
-printf '## List Images\n' >"${readmeTempFile}"
+repoReadmeFile="${workDir}/REPO_README.md"
+if [ ! -f "${readmeFile}" ]; then
+  touch "${readmeFile}"
+fi
+if [ ! -f "${repoReadmeFile}" ]; then
+  touch "${repoReadmeFile}"
+fi
+# Update readme file
+cat "${repoReadmeFile}" > "${readmeFile}"
+printf '\n## List Images\n' >> "${readmeFile}"
+printMdTableRow 'Docker hub image' 'Github image' "${readmeFile}"
+printMdTableRow '----------------' '------------' "${readmeFile}"
+
 # Generate all cache files
-find "${workDir}/cache" -type f -name "*.txt" | while IFS= read -r cacheFile; do
+find "${workDir}/cache" -type f -name "*.txt" | sort | while IFS= read -r cacheFile; do
   for i in $(<"${cacheFile}"); do
     run "$i"
   done
 done
-# Update readme file
-rm "${readmeFile}"
-mv "${readmeTempFile}" "${readmeFile}"
