@@ -30,6 +30,7 @@ run() {
   # Pull and push
   if [ "${isGithubImageExisted}" = false ] && [ "${isDockerImageExisted}" = true ]; then
     pullAndPush "${dockerImageAndTag}" "${githubImageAndTag}"
+    isGithubImageExisted=true
   fi
   # generate readme
   if [ "${isGithubImageExisted}" = true ]; then
