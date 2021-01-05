@@ -45,7 +45,7 @@ generateReadme() {
 printMdTableRow() {
   printf '%s | %s \n' "$1" "$2" >> "$3"
 }
-# Create README.temp.md
+# Create README.md
 readmeFile="${workDir}/README.md"
 repoReadmeFile="${workDir}/REPO_README.md"
 if [ ! -f "${readmeFile}" ]; then
