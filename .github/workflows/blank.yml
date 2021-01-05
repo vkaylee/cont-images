@@ -33,3 +33,10 @@ jobs:
         run: chmod +x run.sh
       - name: Run
         run: ./run.sh
+      - name: Commit changes
+        uses: EndBug/add-and-commit@v6
+        with:
+          author_name: vleedev
+          author_email: me@vlee.dev
+          message: 'Update README.md'
+          add: 'README.md'
