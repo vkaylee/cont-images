@@ -6,9 +6,6 @@ pullAndPush(){
   local imageAndTag=$1
   docker pull "${imageAndTag}"
 }
-# Docker login
-# new login with new container registry url and PAT
-echo ${{ secrets.CR_PAT }} | docker login ghcr.io -u "${GITHUB_ACTOR}" --password-stdin
 # Generate all cache files
 find "${workDir}/cache" -type f -name "*.txt" | while IFS= read -r cacheFile
 do
