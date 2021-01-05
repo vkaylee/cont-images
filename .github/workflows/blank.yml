@@ -33,10 +33,17 @@ jobs:
         run: chmod +x run.sh
       - name: Run
         run: ./run.sh
-      - name: Commit changes
+      - name: Update change README.md
         uses: EndBug/add-and-commit@v6
         with:
           author_name: vleedev
           author_email: me@vlee.dev
-          message: 'update by CI'
-          add: '["README.md", "./cache/*.txt"]'
+          message: 'update README.md by CI'
+          add: 'README.md'
+      - name: Update all txt files in cache
+        uses: EndBug/add-and-commit@v6
+        with:
+          author_name: vleedev
+          author_email: me@vlee.dev
+          message: 'make unique by CI'
+          add: 'cache/*.txt'
