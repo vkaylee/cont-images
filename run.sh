@@ -6,7 +6,7 @@ pullAndPush() {
   local dockerImageAndTag=$1
   local githubImageAndTag=$2
 
-  docker pull "${dockerImageAndTag}"
+  docker pull -q "${dockerImageAndTag}"
   docker tag "${dockerImageAndTag}" "${githubImageAndTag}"
   docker push "${githubImageAndTag}"
 }
@@ -20,10 +20,10 @@ run() {
   local isDockerImageExisted=false
   local isGithubImageExisted=false
   # Check existed
-  if docker pull "${githubImageAndTag}"; then
+  if docker pull -q "${githubImageAndTag}"; then
     isGithubImageExisted=true
   else
-    if docker pull "${dockerImageAndTag}"; then
+    if docker pull -q "${dockerImageAndTag}"; then
       isDockerImageExisted=true
     fi
   fi
