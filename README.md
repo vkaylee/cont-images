@@ -26,6 +26,7 @@ golang:1.15.6-alpine3.12 | ghcr.io/vleedev/cont-images:golang-1.15.6-alpine3.12
 mariadb:10.5.8 | ghcr.io/vleedev/cont-images:mariadb-10.5.8 
 mongo:4.4.3-bionic | ghcr.io/vleedev/cont-images:mongo-4.4.3-bionic 
 php:8.0.0-fpm-alpine | ghcr.io/vleedev/cont-images:php-8.0.0-fpm-alpine 
+rabbitmq:3.8.9-alpine | ghcr.io/vleedev/cont-images:rabbitmq-3.8.9-alpine 
 redis:4.0.14-alpine3.11 | ghcr.io/vleedev/cont-images:redis-4.0.14-alpine3.11 
 redis:5.0.10-alpine3.12 | ghcr.io/vleedev/cont-images:redis-5.0.10-alpine3.12 
 redis:6.0.9-alpine3.12 | ghcr.io/vleedev/cont-images:redis-6.0.9-alpine3.12 
