@@ -15,7 +15,7 @@ run() {
   local dockerImageAndTag
   dockerImageAndTag=$1
   local githubImageAndTag
-  githubImageAndTag="ghcr.io/${GITHUB_REPOSITORY}:$(echo "${dockerImageAndTag}" | tr ":" "-")"
+  githubImageAndTag="ghcr.io/${GITHUB_REPOSITORY}:$(echo "${dockerImageAndTag}" | tr ":" "-" | tr "/" "-")"
 
   local isDockerImageExisted=false
   local isGithubImageExisted=false
