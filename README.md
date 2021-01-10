@@ -25,6 +25,7 @@ docker:20.10.1-git | ghcr.io/vleedev/cont-images:docker-20.10.1-git
 golang:1.15.6-alpine3.12 | ghcr.io/vleedev/cont-images:golang-1.15.6-alpine3.12 
 mariadb:10.5.8 | ghcr.io/vleedev/cont-images:mariadb-10.5.8 
 mongo:4.4.3-bionic | ghcr.io/vleedev/cont-images:mongo-4.4.3-bionic 
+nginxinc/nginx-unprivileged:1.19.6-alpine | ghcr.io/vleedev/cont-images:nginxinc/nginx-unprivileged-1.19.6-alpine 
 php:8.0.0-fpm-alpine | ghcr.io/vleedev/cont-images:php-8.0.0-fpm-alpine 
 rabbitmq:3.8.9-alpine | ghcr.io/vleedev/cont-images:rabbitmq-3.8.9-alpine 
 redis:4.0.14-alpine3.11 | ghcr.io/vleedev/cont-images:redis-4.0.14-alpine3.11 
