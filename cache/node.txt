@@ -1,1 +1,2 @@
 node:14.15.4-alpine3.12
+node:19.7-alpine3.17
